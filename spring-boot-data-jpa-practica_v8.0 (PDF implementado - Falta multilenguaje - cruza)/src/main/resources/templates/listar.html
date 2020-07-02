@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmnls:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body class="background-ok">
+	<header th:replace="layout/layout :: header"></header>
+
+	<br>
+
+	<div class="container py-1">
+		<div class="card bg-light rounded-0 border border-dark">
+			<div class="card-header p-3 mb-2 bg-dark text-white font-weight-bold rounded-0 border border-dark" th:text="${titulo}"></div>			
+			<div class="card-body">
+				<h4 class="card-title">
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-primary btn-s"  th:text="#{text.cliente.crear}"></a>					
+				</h4>
+
+				<table class="table">
+					<thead class="thead-inverse">
+						<tr>
+							<th sec:authorize="hasRole('ROLE_USER')">ID</th>
+							<th th:text="#{text.cliente.nombre}"></th>
+							<th th:text="#{text.cliente.apellido}"></th>
+							<th th:text="#{text.cliente.email}"></th>
+							<th th:text="#{text.cliente.createAt}"></th>
+							<th th:text="#{text.cliente.factura.crear}" sec:authorize="hasRole('ROLE_ADMIN')"></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')" align="center" th:text="#{text.cliente.acciones}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente: ${clientes}">
+							<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-dark btn-s" th:href="@{/ver/} + ${cliente.id}" th:text="${cliente.id}"></a></td>
+							<td th:text="${cliente.nombre}"></td>
+							<td th:text="${cliente.apellido}"></td>
+							<td th:text="${cliente.email}"></td>
+							<td th:text="${cliente.createAt}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-outline-success" th:href="@{'/factura/form/' + ${cliente.id}}" th:text="#{text.cliente.factura.crear}"></a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-outline-primary" th:href="@{/form/} + ${cliente.id}" th:text="#{text.cliente.editar}"></a>&nbsp;<a
+								class="btn btn-outline-danger"
+								th:href="@{/eliminar/} + ${cliente.id}"
+								onclick="return confirm('Estas seguro que deseas eliminar?');"  th:text="#{text.cliente.eliminar}"></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

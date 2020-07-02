@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmnls:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="background-error">
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<br>
+
+	<div class="container py-1">
+		<div class="card bg-danger text-white">
+			<div class="card-header" th:text="#{text.security.error.403.titulo}"></div>
+			<div class="card-body">
+				<h5 class="card-title" th:utext="#{text.security.error.403.permiso(${#authentication.name})}"></h5>
+				<a th:href="@{/listar}" class="btn btn-dark" role="button" th:text="#{text.security.error.403.volver}"></a>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	
+</body>
+</html>

@@ -1,0 +1,23 @@
+.background-ok{
+	
+	background-image: url("../images/background_ok.png");
+	background-size: cover;
+    background-attachment: fixed;
+    
+}
+.background-error{
+	
+	background-image: url("../images/background_error.png");
+	background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.hr-white{
+	
+	height: 1px;
+	border: 0;
+	color: white;
+	background-color: white;
+	
+}
